@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <div id="game"> 
+        <div class="control">
+            <button>Start</button>
+            <button id="reset-btn">Reset</button>
+            <div class="stats">
+                <div class="moves">0 Moves</div>
+                <div class="timer">Time : 0 sec</div>
+            </div>
+        </div>
+        <div class="board-container">
+            <div class="board" data-dimension = "4"></div>
+            <div class="win">You Won!</div>
+        </div>
+    </div>
+
+
+    <script src="./script.js"></script>
+</body>
+</html>

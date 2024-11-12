@@ -1,0 +1,228 @@
+html {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(325deg, #03001e 0%, #7303ce 30%, #ec38bc 70%, #fdeff9 100%);
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+}
+
+#game {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.control {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+button {
+    background: #282a3a;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: 0;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: inset -2px -2px 5px #fc81db;
+}
+
+button:hover{
+    border: .5px solid black;
+    background-color: transparent;
+    color: black;
+    transition: .3s ease;
+    box-shadow: inset .5px .5px 7px #0a0a0af1;
+}
+
+.disabled {
+    color: #757575;
+}
+
+.stats {
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.board-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+@property --angle{
+
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.board-container::after,.board-container::before{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle),#ff009d,#7303ce,#ec38bc,#fdeff9);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    padding: 5px;
+    border-radius: 5px;
+    animation: spin 3s linear infinite;
+}
+
+.board-container::before{
+    filter: blur(1rem);
+    opacity: 0.5;
+}
+
+@keyframes spin{
+    from{--angle:0deg;
+
+    }
+    to{--angle:360deg;
+
+    }
+}
+
+
+.board, .win {
+    border-radius: 5px;
+    box-shadow: 0 25px 50px rgb(33 33 33 / 25%);
+    background: linear-gradient(135deg, #03001e 0%, #7303ce 0%, #ec38bc 50%, #fdeff9 100%);   
+    transition: transform .6s cubic-bezier(0.4, 0.0, 0.2, 1);
+    backface-visibility: hidden;
+}
+
+.board {
+    width: 90%; 
+    max-width: 360px;
+    height: auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.board-container.flipped .board {
+    transform: rotateY(180deg) rotateZ(50deg);
+}
+.board-container.flipped .win {
+    transform: rotateY(0) rotateZ(0);
+}
+.card {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+}
+.card-front, .card-back {
+    position: absolute;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    background-color: #282e3a;
+    transition: transform .6s cubic-bezier(0.4, 0.0, 0.2, 1);
+    backface-visibility: hidden;
+}
+.card-back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotateY(180deg) rotateZ(50deg);
+    font-size: 30px;
+    user-select: none;
+    text-align: center;
+    line-height: 80px;
+    background: linear-gradient(135deg, #03001e 0%, #7303ce 0%, #ec38bc 50%, #fdeff9 100%);
+    font-weight: bold;
+    outline: #03001e;
+}
+.card.flipped .card-front {
+    transform: rotateY(180deg) rotateZ(50deg);
+}
+.card.flipped .card-back {
+    transform: rotateY(0) rotateZ(0);
+}
+.win {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: linear-gradient(135deg, #03001e 0%, #7303ce 0%, #ec38bc 50%, #fdeff9 100%);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: #fff;
+    -webkit-text-stroke: .5px black;
+    text-shadow: 1px 1px 2px white;
+    transform: rotateY(180deg) rotateZ(50deg);
+}
+.highlight {
+    color: #7303c0;
+    -webkit-text-stroke: .5px white;
+    text-shadow: 2px 2px 4px #03001e;
+
+
+}
+
+@media (max-width: 768px) {
+    .board {
+        grid-template-columns: repeat(2, auto);
+        grid-gap: 10px;
+    }
+
+    .card {
+        width: 60px;
+        height: 60px;
+    }
+
+    button {
+        padding: 8px 16px;
+        font-size: 16px;
+    }
+
+    .stats {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .board {
+        grid-template-columns: repeat(2, auto);
+        grid-gap: 5px;
+        align-items: center;
+
+    }
+
+    .card {
+        width: 50px;
+        height: 50px;
+    }
+
+    button {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .stats {
+        font-size: 10px;
+    }
+}
+
